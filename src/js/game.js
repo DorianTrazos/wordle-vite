@@ -1,6 +1,6 @@
-import { gameBoardElement } from './dom';
+import { errorMessageElement, gameBoardElement, userWordFormElement } from './dom';
 
-const ALL_WORDS = ['cosa'];
+const ALL_WORDS = ['cosa', 'casas'];
 const NUMBER_OF_TRIES = 5;
 
 let secretWord;
@@ -9,7 +9,6 @@ let currentRow = 0;
 const chooseSecretWord = () => {
   const randomNumber = Math.floor(Math.random() * ALL_WORDS.length);
   secretWord = ALL_WORDS[randomNumber];
-  console.log(secretWord);
 };
 
 const createGameBoard = () => {
@@ -40,6 +39,13 @@ const printLetter = (letter, position, className) => {
 };
 
 const checkWord = userWord => {
+  if (userWord.length !== secretWord.length) {
+    errorMessageElement.textContent = `The word doesn't have ${secretWord.length} characters`;
+    return;
+  } else {
+    errorMessageElement.textContent = '';
+  }
+
   let className;
   let wordToCheck = secretWord;
 
@@ -63,7 +69,18 @@ const checkWord = userWord => {
     printLetter(letter, i, className);
   }
 
+  if (userWord === secretWord) {
+    errorMessageElement.textContent = 'WIN';
+    userWordFormElement.classList.add('hide');
+    return;
+  }
+
   currentRow++;
+
+  if (currentRow === NUMBER_OF_TRIES) {
+    errorMessageElement.textContent = 'LOSE';
+    userWordFormElement.classList.add('hide');
+  }
 };
 
 const startGame = () => {
@@ -71,4 +88,4 @@ const startGame = () => {
   createGameBoard();
 };
 
-export { startGame };
+export { checkWord, startGame };
