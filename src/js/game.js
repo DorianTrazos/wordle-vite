@@ -1,6 +1,23 @@
 import { errorMessageElement, gameBoardElement, userWordFormElement } from './dom';
 
-const ALL_WORDS = ['cosa', 'casas'];
+const ALL_WORDS = [
+  'zara',
+  'pelo',
+  'humo',
+  'chasqueador',
+  'zombie',
+  'atropello',
+  'ticket',
+  'infectado',
+  'hambre',
+  'accidente',
+  'vitrina',
+  'apocalipsis',
+  'supervivencia',
+  'sangre',
+  'hongo',
+  'cordyceps'
+];
 const NUMBER_OF_TRIES = 5;
 
 let secretWord;
